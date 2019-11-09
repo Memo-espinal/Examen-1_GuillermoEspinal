@@ -104,8 +104,13 @@ public class Libro {
 
     @Override
     public String toString() {
-        return "Libro: " +titulo + "\nDescripcion: " + descripcion + "\nPuntaje" + puntaje + "\nCopias: " + copias + "\nGenero: " + genero + "\nValor: " + valor + "\nEdicion: " + edicion + "\nAutor: " + autor + "\nFecha: " + fecha ;
+         return "Libro: " +titulo + "\nDescripcion: " + descripcion + "\nPuntaje" + puntaje + "\nCopias: " + copias + "\nGenero: " + genero + "\nValor: " + valor + "\nEdicion: " + edicion + "\nAutor: " + autor + "\nFecha: " + fecha ;
+        //return "Libro: " +titulo + "\nAutor: " + autor  ;
     }
+    /*
+    public String toString2() {
+        return "Libro: " +titulo + "\nDescripcion: " + descripcion + "\nPuntaje" + puntaje + "\nCopias: " + copias + "\nGenero: " + genero + "\nValor: " + valor + "\nEdicion: " + edicion + "\nAutor: " + autor + "\nFecha: " + fecha ;
+    }*/
     
     
     
