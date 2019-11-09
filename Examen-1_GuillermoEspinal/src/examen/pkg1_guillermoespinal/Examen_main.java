@@ -555,20 +555,55 @@ public class Examen_main extends javax.swing.JFrame {
         jp_modificar.setEnabled(false);
 
         jButton1.setText("Modificar el Titulo");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("Modificar el Genero");
 
         jButton3.setText("Modificar la fecha");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
 
         jButton4.setText("Modificar la Descripcion");
+        jButton4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton4MouseClicked(evt);
+            }
+        });
 
         jButton5.setText("Modificar el Puntaje");
+        jButton5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton5MouseClicked(evt);
+            }
+        });
 
         jButton6.setText("Modificar el valor ");
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
 
         jButton7.setText("Modificar el  autor");
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
 
         jButton8.setText("Modificar la Edicion");
+        jButton8.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton8MouseClicked(evt);
+            }
+        });
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton8ActionPerformed(evt);
@@ -576,6 +611,11 @@ public class Examen_main extends javax.swing.JFrame {
         });
 
         jButton9.setText("Modificar las copias del libro");
+        jButton9.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton9MouseClicked(evt);
+            }
+        });
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton9ActionPerformed(evt);
@@ -851,6 +891,7 @@ public class Examen_main extends javax.swing.JFrame {
         Boolean loggin_user =false;
         String usu = tf_usuario.getText();
         String pass = tf_contra.getText();
+       
       
         for (int i = 0; i <usuarios.size(); i++) {
             if(usuarios.get(i)instanceof admin){
@@ -858,6 +899,8 @@ public class Examen_main extends javax.swing.JFrame {
                     if (usuarios.get(i).getContra().equals(pass)) {
                         loggin_admin=true;
                         nombre_usuario = usuarios.get(i).getUsuario();
+                        usuario.setUsuario(usuarios.get(i).getUsuario());
+                       // Usuario usuario = usuario;
                     }
                 }
             }else{
@@ -865,10 +908,14 @@ public class Examen_main extends javax.swing.JFrame {
                     if (usuarios.get(i).getContra().equals(pass)) {
                         loggin_user=true;
                         nombre_usuario = usuarios.get(i).getUsuario();
+                        usuario.setContra(usuarios.get(i).getUsuario());
                     }
                 }
             }
         }
+        
+        
+        
         if (loggin_admin) {
            
             //jpanel_crearlibros.setEnabled(true);
@@ -911,6 +958,18 @@ public class Examen_main extends javax.swing.JFrame {
         Usuario user = new Usuario(usuario, contra, fecha, numero, correo, genero);
         usuarios.add(user);
         historial += nombre_usuario+" a creado un usuario\n";
+        //seters
+        tf_creacion_usuario.setText("");
+        tf_creacion_contra.setText("");
+        tf_creacion_correo.setText("");
+        tf_creacion_numero.setText("");
+        
+        rb_accionusu.setSelected(true);
+        rb_romanceusu.setSelected(false);
+        rb_historiausu.setSelected(false);
+        rb_fantasiausu.setSelected(false);
+        jd_fecha_usu.setDate(new Date());
+        
         }catch (Exception e){
             JOptionPane.showMessageDialog(this,"Ocurrio un error no se pudo crear el usuario");
             historial+= (nombre_usuario + "Ocurrio un error no se pudo crear el usuario\n");
@@ -952,6 +1011,8 @@ public class Examen_main extends javax.swing.JFrame {
         cb_libros_agregar.setModel(libros_dc);
         //cambio del tercer combox
         cb_modificar.setModel(dc);
+        
+        
       }catch (Exception e){
           JOptionPane.showMessageDialog(this,"Ocurrio un error no se pudo crear el libro ");
           historial+=("Ocurrio un error no se pudo crear el libro \n");
@@ -981,10 +1042,52 @@ public class Examen_main extends javax.swing.JFrame {
     private void cb_libros_agregarItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cb_libros_agregarItemStateChanged
        if (evt.getStateChange()==2){
             Libro libro = (Libro) cb_libros_agregar.getSelectedItem();
+            usuario.setLibro(libro);
             //ya vuelvo
           
         }
     }//GEN-LAST:event_cb_libros_agregarItemStateChanged
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+       Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setTitulo(tf_titulo_mod.getText());
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton4MouseClicked
+        Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setDescripcion(tf_descripcion_mod.getText());
+    }//GEN-LAST:event_jButton4MouseClicked
+
+    private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
+        Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setPuntaje((int) spi_puntaje_mod.getValue());
+    }//GEN-LAST:event_jButton5MouseClicked
+
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setValor(Integer.parseInt(tf_precio_mod.getText()));
+    }//GEN-LAST:event_jButton6MouseClicked
+
+    private void jButton9MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton9MouseClicked
+       Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setCopias((int)spi_copias_mod.getValue());
+    }//GEN-LAST:event_jButton9MouseClicked
+
+    private void jButton8MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton8MouseClicked
+       Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setEdicion((int)spi_edicion_mod.getValue());
+    }//GEN-LAST:event_jButton8MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+     Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setFecha(jd_publicacion_mod.getDate());
+        ///
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+       Libro libro =(Libro) cb_modificar.getSelectedItem();
+        libro.setAutor(tf_autor_mod.getText());
+    }//GEN-LAST:event_jButton7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -1133,7 +1236,7 @@ public class Examen_main extends javax.swing.JFrame {
     static ArrayList<Usuario> usuarios = new ArrayList();
     static String historial;
     static  String nombre_usuario;
-     
+      static Usuario usuario = new Usuario();
     //Libro libro = new Libro("Alicia en el pais de las maravillas", "Lindo bonito y loco", 2, 4, "Fantasia", 350, 1, " sepa ", new Date());
     //libros.add(libro);
     
